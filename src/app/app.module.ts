@@ -26,7 +26,7 @@ import { DateAgoPipe } from './services/pipe/date-ago.pipe';
 import { environment } from 'src/environments/environment';
 
 export function initializeFirebaseApp(): FirebaseApp {
-    return initializeApp(environment.firebaseConfig);
+    return initializeApp(environment.firebase);
   }
 
 @NgModule({
