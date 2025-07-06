@@ -10,7 +10,8 @@
     "build:prod": "ng build --configuration production",
     "vercel-build": "npm run build:prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "node fix-rxfire.js"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +44,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "patch-package": "^8.0.0",
     "typescript": "~5.4.5"
   }
 }
