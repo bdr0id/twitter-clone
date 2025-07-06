@@ -3,7 +3,11 @@
   "builds": [
     {
       "src": "angular.json",
-      "use": "@vercel/angular"
+      "use": "@vercel/angular",
+      "config": {
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist/twitter-clone"
+      }
     }
   ],
   "env": {
@@ -13,7 +17,8 @@
     "FIREBASE_PROJECT_ID": "@FIREBASE_PROJECT_ID",
     "FIREBASE_STORAGE_BUCKET": "@FIREBASE_STORAGE_BUCKET",
     "FIREBASE_MESSAGING_SENDER_ID": "@FIREBASE_MESSAGING_SENDER_ID",
-    "FIREBASE_APP_ID": "@FIREBASE_APP_ID",
-    "FIREBASE_MEASUREMENT_ID": "@FIREBASE_MEASUREMENT_ID"
-  }
+    "FIREBASE_APP_ID": "@FIREBASE_APP_ID"
+  },
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/twitter-clone"
 }

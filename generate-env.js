@@ -1,6 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
+// Load .env file if it exists
+try {
+  require('dotenv').config();
+} catch (e) {
+  console.log("dotenv not available, using system environment variables");
+}
+
 const requiredVars = [
   "FIREBASE_API_KEY",
   "FIREBASE_AUTH_DOMAIN",
@@ -9,14 +16,20 @@ const requiredVars = [
   "FIREBASE_STORAGE_BUCKET",
   "FIREBASE_MESSAGING_SENDER_ID",
   "FIREBASE_APP_ID",
-  "PRODUCTION",
 ];
 
+// Check for missing variables
+const missingVars = [];
 for (const key of requiredVars) {
   if (!process.env[key]) {
-    console.error(`❌ Missing environment variable: ${key}`);
-    process.exit(1);
+    missingVars.push(key);
   }
+}
+
+if (missingVars.length > 0) {
+  console.error(`❌ Missing environment variables: ${missingVars.join(', ')}`);
+  console.error("Please set these variables in your Vercel project settings or create a .env file");
+  process.exit(1);
 }
 
 const firebaseConfig = `{
@@ -40,11 +53,10 @@ const devContent = `export const environment = {
 fs.writeFileSync(path.join(envFolder, "environment.ts"), devContent);
 console.log("✅ Created environment.ts");
 
-if (process.env.PRODUCTION === "true") {
-  const prodContent = `export const environment = {
-    production: true,
-    firebase: ${firebaseConfig}
-  };`;
-  fs.writeFileSync(path.join(envFolder, "environment.prod.ts"), prodContent);
-  console.log("✅ Created environment.prod.ts");
-}
+// Always create production environment file for Vercel
+const prodContent = `export const environment = {
+  production: true,
+  firebase: ${firebaseConfig}
+};`;
+fs.writeFileSync(path.join(envFolder, "environment.prod.ts"), prodContent);
+console.log("✅ Created environment.prod.ts");
