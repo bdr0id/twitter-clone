@@ -1,15 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "angular.json",
-      "use": "@vercel/angular",
-      "config": {
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist/twitter-clone"
-      }
-    }
-  ],
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/twitter-clone"
+  "outputDirectory": "dist/twitter-clone",
+  "framework": "angular"
 }
